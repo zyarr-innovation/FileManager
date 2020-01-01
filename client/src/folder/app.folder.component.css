@@ -1,0 +1,29 @@
+.card-list {
+   display: flex;
+   justify-content: flex-start;
+   flex-wrap: wrap;
+ }
+
+ mat-card {
+    margin: 10px;
+    width: 200px;
+    height: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: rgba(230, 230, 240, 0.9);
+    border-radius: 10px !important;
+ }
+
+ mat-card-actions button {
+   background-color: rgba(160, 160, 240, 0.9);
+   
+ }
+ 
+ .folder-card {
+    background-color: rgba(226, 240, 220, 0.9);
+ }
+ 
+ .folder-button {
+    background-color:rgba(183, 220, 220, 0.9) !important;
+ }

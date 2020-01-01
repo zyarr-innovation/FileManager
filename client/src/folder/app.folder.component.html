@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <a routerLink="/" mat-button>Home</a>
+</mat-toolbar>
+
+<div  class="card-list">
+  <div *ngFor="let folder of folderList">
+    <mat-card 
+    [ngClass]="{'folder-card': folder.name.endsWith('/') }">
+      <mat-card-header
+        matTooltip="{{folder.name}}" >
+        <mat-card-title>{{folder.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button 
+          matTooltip="{{folder.name}}"
+          [ngClass]="{'folder-button': folder.name.endsWith('/') }"
+          (click)="onClick(folder.name)">
+          <fa-icon [icon]="folder.type" size="2x" ></fa-icon>
+        </button>
+          
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
