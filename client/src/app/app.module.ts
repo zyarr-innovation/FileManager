@@ -17,11 +17,17 @@ import { AppFileNotFoundComponent } from './app.FileNFound';
 import { FolderComponent } from 'src/folder/app.folder.component';
 import {FolderService } from '../folder/app.folder.service';
 
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfig } from './app.config';
 
 const routes: Routes = [
   { path: '', component: FolderComponent },
   { path: '**', component: AppFileNotFoundComponent },
 ];
+
+export function initializeApp(appConfig: AppConfig) {
+  return () => appConfig.load();
+}
 
 @NgModule({
   declarations: [
@@ -42,7 +48,13 @@ const routes: Routes = [
     FontAwesomeModule,
     RouterModule.forRoot(routes)
   ],  
-  providers: [FolderService],
+  providers: [
+    AppConfig,
+       { provide: APP_INITIALIZER,
+         useFactory: initializeApp,
+         deps: [AppConfig], multi: true },
+
+    FolderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

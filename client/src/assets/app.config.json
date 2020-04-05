@@ -1,0 +1,24 @@
+{
+    "env": {
+    "name": "DEV"
+     },
+    "appInsights": {
+    "instrumentationKey": "<dev-guid-here>"
+     },
+    "logging": {
+    "console": true,
+    "appInsights": false
+    },
+    "aad": {
+    "requireAuth": true,
+    "tenant": "<dev-guid-here>",
+    "clientId": "<dev-guid-here>"
+    },
+    
+    "apiServer": {
+    "protocol": "http",
+    "name": "192.168.0.106",
+    "port" : "8082"
+    }
+
+}

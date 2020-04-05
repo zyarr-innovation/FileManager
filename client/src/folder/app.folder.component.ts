@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faFile, faFileAudio, faFileCode, faFileExcel, faFileImage, faFilePdf, faFilePowerpoint, faFileVideo, faFileWord, faFolder, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { IFolderContent } from './app.component.model';
 import { FolderService } from './app.folder.service';
-
-const localUrl = 'http://localhost:8080/';
+import {IAppConfig} from '../app/app.config.model'
+import {AppConfig} from '../app/app.config';
 
 @Component({
   selector: 'app-folder',
@@ -12,12 +12,16 @@ const localUrl = 'http://localhost:8080/';
   styleUrls: ['./app.folder.component.css']
 })
 export class FolderComponent implements OnInit {
-  
+  localUrl = AppConfig.settings.apiServer.protocol + "://" +
+    AppConfig.settings.apiServer.name + ":" + 
+    AppConfig.settings.apiServer.port + "/";
+
   title = 'Library';
   folderList: IFolderContent[] = [];
   currentPath: string;
 
   constructor (
+    private appConfig: AppConfig,
     private dataService: FolderService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
@@ -48,7 +52,7 @@ export class FolderComponent implements OnInit {
   }
 
   private getData(currentDir: string) {
-    let currentUrl = localUrl + "?dir=/" + currentDir
+    let currentUrl = this.localUrl + "?dir=/" + currentDir
     this.dataService.getDataList(currentUrl)
       .subscribe(data => {
         this.folderList = [];
@@ -97,7 +101,7 @@ export class FolderComponent implements OnInit {
   }
 
   private getFile(currentFile: string) {
-    let currentUrl = localUrl + encodeURIComponent(currentFile);
+    let currentUrl = this.localUrl + encodeURIComponent(currentFile);
     window.open (currentUrl);
   }
 }
